@@ -1,7 +1,17 @@
-require_relative 'contact'
+require_relative 'contact.rb'
+require 'sinatra'
 
 get '/' do
   erb :index
+end
+
+get '/contacts' do
+  @current_contact_list = Contact.all
+  erb :contacts
+end
+
+get '.about_me' do
+  erb :about_me
 end
 
 
@@ -129,6 +139,6 @@ class CRM
   end
 end
 
-at_exit do
+after do
   ActiveRecord::Base.connection.close
 end
